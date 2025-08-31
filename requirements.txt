@@ -1,3 +1,5 @@
 requests
-prefects
+prefect
 bs4
+pyodbc
+pandas
