@@ -9,7 +9,8 @@ conn = pyodbc.connect(
     'Trusted_Connection=yes'
 )
 
-query = "SELECT * FROM Hecho_Licencias_Obras;"
+# query = "SELECT * FROM Hecho_Licencias_Obras;"
+query = " select * from Hecho_Licencias_Obras where id_hecho = 1"
 df = pd.read_sql(query, conn)
 
 print(df)
