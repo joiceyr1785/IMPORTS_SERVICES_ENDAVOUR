@@ -38,8 +38,23 @@ def conectar_bd(servidor, base_datos, query):
     return df
 
 
+def insertar_proyecto(engine, distrito, provincia, departamento, region):
+    query = text("""
+        INSERT INTO Dim_Ubicacion(distrito, provincia, departamento, region)
+        VALUES (:distrito, :provincia, :departamento, :region)
+    """)
+    with engine.begin() as conn:
+        conn.execute(query, {
+            "distrito": distrito,
+            "provincia": provincia,
+            "departamento": departamento,
+            "region": region
+        })
+
+
 if __name__ == "__main__":
-    query = "SELECT * FROM Hecho_Licencias_Obras"
-    df = conectar_bd("SERVER=USUARIO-MKQRT2U", "DATABASE=IMPORTS_SERVICES_ENDAVOUR", query)
+    query = "SELECT * FROM Hecho_Licencias_Obras;"
+    df = conectar_bd("USUARIO-MKQRT2U", "IMPORTS_SERVICES_ENDAVOUR", query)
+    insertar_proyecto(engine,"San Juan de Miraflores", "Lima", "Lima", "Costa")
     print(df.head())
 
